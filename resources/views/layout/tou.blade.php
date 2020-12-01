@@ -6,7 +6,7 @@
 					<ul class="fl">
 						<li class="f-item">品优购欢迎您！</li>
 						@if(isset($_SESSION['user_id']) && isset($_SESSION['user_name']))
-						<li class="f-item"><a href="{{('tui')}}">退出</a><span><a href="" >欢迎{{$_SESSION['user_id']}}</a></span></li>
+						<li class="f-item"><a href="{{('tui')}}">退出</a><span><a href="" >欢迎{{$_SESSION['user_name']}}</a></span></li>
 						@else
 						<li class="f-item"><a href="{{('login')}}">登入</a><span><a href="{{('register')}}">注册</a></span></li>
 						@endif

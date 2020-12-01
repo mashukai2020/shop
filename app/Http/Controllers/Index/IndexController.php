@@ -130,4 +130,12 @@ class IndexController extends Controller
         $uri = "https://devapi.qweather.com/v7/weather/now?location=101010700&key=3e53a367400347b2afce3b9692011bd7&gzip=n";
         
     }
+    public function test(){
+        $goods_info=[
+            'goods_id' =>12345,
+            'goods_name' => "IPHONE",
+            'price' =>3.1415926
+        ];
+        echo json_encode($goods_info);
+    }
 }

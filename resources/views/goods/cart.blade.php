@@ -65,7 +65,7 @@
 								<li class="yui3-u-1-8"><span class="price">{{$v->shop_price}}</span></li>
 								<li class="yui3-u-1-8">
 									<a href="javascript:void(0)" class="increment mins">-</a>
-									<input autocomplete="off" type="text" value="{{$v->buy_number}}" minnum="1" class="itxt" />
+									<input autocomplete="off" type="text" value="{{$v->buy_number}}" minnum="1" id="buynu" class="itxt" />
 									<a href="javascript:void(0)" class="increment plus">+</a>
 								</li>
 								<li class="yui3-u-1-8"><span class="sum">￥{{$v->shop_price*$v->buy_number}}</span></li>
@@ -239,7 +239,7 @@
 
 </html>
 @endsection
-<script  src="/index/js/plugins/jquery/jquery.min.js"></script>
+<script src="/index/js/plugins/jquery/jquery.min.js"></script>
 <script>
     $(document).on("click",".del",function(){
         var cart_id = $(this).attr('cart_id');
@@ -257,7 +257,6 @@
 		alert(1);
 		if(confirm('你确定要加入购物车吗')){
 			alert(1);
-
         $.get('zong/'+cart_id,function(data){
             if(data.code=='00000'){
                 location.href="/cart/cartlist";
@@ -265,7 +264,6 @@
         },'json');
 		}
 		alert(1);
-
 	})
 
 </script>

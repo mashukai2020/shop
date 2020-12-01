@@ -13,8 +13,8 @@ class LoginController extends Controller
         $post['password']=md5('password');
 
         $user = Puser::where('user_name',$post['user_name'])->first();
-        // dump($user);exit;
         //根据用户查询出来的信息
+
         if(($user->password)!=$post['password']){
             return redirect('/index/login');
         }
@@ -25,10 +25,13 @@ class LoginController extends Controller
         $res = Puser::where('user_id',$user['user_id'])->update($data);
         //存入session
         session_start();
-        // $user_name = array_column($user(), 'user_name');
-        // $user_id = array_column($user, 'user_id');
-        $_SESSION['user_name']=$user['user_id'];
-        $_SESSION['user_id']=$user['user_name'];
+
+        $_SESSION['user_name']=$user['user_name'];
+        $_SESSION['user_id']=$user['user_id'];
+        // echo $_SESSION['user_name'];
+        // echo $_SESSION['user_id'];
+        // echo $_SESSION['user_name'];
+        
         return redirect('index/index');
     }
 

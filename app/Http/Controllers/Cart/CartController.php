@@ -15,28 +15,53 @@ class CartController extends Controller
         $post['user_id']=3836;
         $post['ctime']=time();
         // dump($post);exit;
-        $goods = \DB::table('cart')->where('goods_id',$post['goods_id'])->value('buy_number');
-        // dump($post);
-        // dump($goods);exit;
-        if($goods==''){
-            $res = \DB::table('cart')->insert($post);
+        if($post['buy_number']>20){
+            echo"不能大于20";
+            $goods_id=$post['goods_id'];
+            $res= \DB::table('p_goods')->where('goods_id',$goods_id)->first();
+            if($res==''){
+                echo"无商品";
+                return view('index/index');
+            }
+    
+            return view('goods/list',['res'=>$res]);exit;
         }else{
-            $data['buy_number']=$goods+$post['buy_number'];
+            $goods = \DB::table('cart')->where('goods_id',$post['goods_id'])->value('buy_number');
+            // dump($post);
+            // dump($goods);exit;
+            if($goods==''){
+                $res = \DB::table('cart')->insert($post);
+            }else{
+                $data['buy_number']=$goods+$post['buy_number'];
+                if($data['buy_number']>20){
+                    echo"购物车的数量不能大于20";
+                    $goods_id=$post['goods_id'];
+                    $res= \DB::table('p_goods')->where('goods_id',$goods_id)->first();
+                    if($res==''){
+                        echo"无商品";
+                        return view('index/index');
+                    }
             
-            $update=[
-                       'buy_number' => $data['buy_number'],
+                    return view('goods/list',['res'=>$res]);exit;
+                }else{
+                    $update=[
+                        'buy_number' => $data['buy_number'],
                     ];
+    
+                // dump($data);exit;
+                $add = \DB::table('cart')->where('goods_id',$post['goods_id'])->update($update);
+                }
 
-            // dump($data);exit;
-            $add = \DB::table('cart')->where('goods_id',$post['goods_id'])->update($update);
-        }
-
+            }
+    
             return redirect('cart/cartlist');
+        }
+        
     }
     public function cartlist(){
         $res = \DB::table('cart')
-            ->join('p_goods','cart.goods_id','=','p_goods.goods_id')
-            ->orderBy('ctime','desc')->paginate(100000);
+              ->join('p_goods','cart.goods_id','=','p_goods.goods_id')
+              ->orderBy('ctime','desc')->paginate(100000);
         // print_r($res);exit;
         return view('goods/cart',['res'=>$res]);
     }

@@ -244,8 +244,8 @@
 							<div class="fl title">
 								<div class="control-group">
 									<div class="controls">
-										<input  type="text" name="buy_number" value="1" minnum="1" id="cbuy" class="itxt">
-										<a href="javascript:void(0)" class="increment plus">+</a>
+										<input  type="text" name="buy_number" value="1" minnum="1"  class="itxt">
+										<a href="javascript:void(0)" class="increment plus" id="buynu">+</a>
 										<a href="javascript:void(0)" class="increment mins">-</a>
 									</div>
 								</div>
@@ -319,6 +319,19 @@ $(function(){
         )
         })
     })
-
+    $(document).on("blur","#buynu",function(){
+        var buy_number = $(this).parent('input').prop('name');
+		console.log(buy_number);
+		// alert(1);
+		// if(confirm('你确定要加入购物车吗')){
+		// 	alert(1);
+        // $.get('zong/'+cart_id,function(data){
+        //     if(data.code=='00000'){
+        //         location.href="/cart/cartlist";
+        //     }
+        // },'json');
+		// }
+		alert(1);
+	})
 </script>
 @endsection
